@@ -1,0 +1,10 @@
+
+Zadanie możesz zrealizować na dwa sposoby:
+
+dodając analogiczną funkcjonalność jak opisana poniżej do swojej aplikacji
+tworząc aplikację od podstaw
+
+Treść zadania:
+Wykorzystaj 
+	https://openweathermap.org/api
+do pobrania informacji o pogodzie we wpisanym przez użytkownika mieście. Jeśli miasto nie zostanie znalezione, to poinformuj go o tym stosownym komunikatem.
