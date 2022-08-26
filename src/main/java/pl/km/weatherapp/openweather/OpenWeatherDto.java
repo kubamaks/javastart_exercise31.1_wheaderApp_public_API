@@ -7,17 +7,17 @@ import java.util.Map;
 
 @Data
 public class OpenWeatherDto {
-    Map<String, String> coord;
-    List<Weather> weather;
-    String base;
-    Map<String, String> main;
-    int visibility;
-    Map<String, String> wind;
-    Map<String, String> clouds;
-    int dt;
-    Map<String, String> sys;
-    int timezone;
-    int id;
-    String name;
-    int cod;
+    private Map<String, String> coord;
+    private List<Weather> weather;
+    private String base;
+    private Map<String, String> main;
+    private int visibility;
+    private Map<String, String> wind;
+    private Map<String, String> clouds;
+    private int dt;
+    private Map<String, String> sys;
+    private int timezone;
+    private int id;
+    private String name;
+    private int cod;
 }

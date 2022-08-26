@@ -1,7 +1,12 @@
 package pl.km.weatherapp;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import pl.km.weatherapp.exceptions.ApiConnectionException;
+import pl.km.weatherapp.exceptions.CityNotFoundException;
 import pl.km.weatherapp.openweather.OpenWeatherDto;
 
 @Service
@@ -13,8 +18,15 @@ public class WeatherService {
     public WeatherDto getWeatherInCity(String city) {
         RestTemplate restTemplate = new RestTemplate();
         String url = URL_START + city + URL_END + API_KEY;
-        OpenWeatherDto response = restTemplate.getForObject(url, OpenWeatherDto.class);
-//        WeatherDto weatherDto1 = new WeatherDto("Londyn", "zachmurzenie umiarkowane", 26.88, 27.67, 1015.0, 56.0, 10000, 4.63, 210, 57);
-        return WeatherDtoMapper.map(response);
+        try {
+            ResponseEntity<OpenWeatherDto> response = restTemplate.getForEntity(url, OpenWeatherDto.class);
+            return WeatherDtoMapper.map(response.getBody());
+        } catch (HttpClientErrorException e) {
+            if (e.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                throw new CityNotFoundException("City not found");
+            } else {
+                throw new ApiConnectionException("Problem with connection occured");
+            }
+        }
     }
 }
